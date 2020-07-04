@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import './hal_komputer.dart' as komputer;
+import './hal_radio.dart' as radio;
+import './hal.headset.dart' as headset;
+import './hal_smartphone.dart' as hp;
 
 void main() {
   runApp(new MaterialApp(
@@ -6,7 +10,7 @@ void main() {
     home: new HalamanSatu(),
     routes: <String, WidgetBuilder>{
       '/Halsatu': (BuildContext context) => new HalamanSatu(),
-      '/Haldua': (BuildContext context) => new HalamanDua(),
+      // '/Haldua': (BuildContext context) => new HalamanDua(),
     },
   ));
 }
@@ -146,40 +150,113 @@ void main() {
 // }
 // end card
 
-class HalamanSatu extends StatelessWidget {
+// class HalamanSatu extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: new AppBar(
+//         title: new Text("Music"),
+//       ),
+//       body: new Center(
+//           child: new IconButton(
+//               icon: new Icon(Icons.headset, size: 50.0),
+//               onPressed: () {
+//                 Navigator.pushNamed(context, '/Haldua');
+//               })),
+//     );
+//   }
+// }
+// navigation
+// class HalamanDua extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: new AppBar(
+//         title: new Text("Speaker"),
+//       ),
+//       body: new Center(
+//           child: new IconButton(
+//               icon: new Icon(
+//                 Icons.speaker,
+//                 size: 50.0,
+//                 color: Colors.red,
+//               ),
+//               onPressed: () {
+//                 Navigator.pushNamed(context, '/Halsatu');
+//               })),
+//     );
+//   }
+// }
+class HalamanSatu extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Music"),
-      ),
-      body: new Center(
-          child: new IconButton(
-              icon: new Icon(Icons.headset, size: 50.0),
-              onPressed: () {
-                Navigator.pushNamed(context, '/Haldua');
-              })),
-    );
-  }
+  _HalamanSatuState createState() => _HalamanSatuState();
 }
 
-class HalamanDua extends StatelessWidget {
+class _HalamanSatuState extends State<HalamanSatu>
+    with SingleTickerProviderStateMixin {
+  TabController controller;
+  @override
+  void initState() {
+    controller = new TabController(vsync: this, length: 4);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Speaker"),
+        backgroundColor: Colors.amber,
+        title: new Text("Daftar Elektronik"),
+        bottom: new TabBar(
+          controller: controller,
+          tabs: <Widget>[
+            new Tab(
+              icon: new Icon(Icons.computer),
+              text: 'Komputer',
+            ),
+            new Tab(icon: new Icon(Icons.headset), text: 'headset'),
+            new Tab(
+              icon: new Icon(Icons.radio),
+              text: 'Radio',
+            ),
+            new Tab(
+              icon: new Icon(Icons.smartphone),
+              text: 'Smartphone',
+            ),
+          ],
+        ),
       ),
-      body: new Center(
-          child: new IconButton(
-              icon: new Icon(
-                Icons.speaker,
-                size: 50.0,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/Halsatu');
-              })),
+      body: new TabBarView(
+        controller: controller,
+        children: <Widget>[
+          new komputer.Komputer(),
+          new headset.Headset(),
+          new radio.Radio(),
+          new hp.Smartphone()
+        ],
+      ),
+      bottomNavigationBar: new Material(
+          color: Colors.amber,
+          child: new TabBar(controller: controller, tabs: <Widget>[
+            new Tab(
+              icon: new Icon(Icons.computer),
+            ),
+            new Tab(
+              icon: new Icon(Icons.headset),
+            ),
+            new Tab(
+              icon: new Icon(Icons.radio),
+            ),
+            new Tab(
+              icon: new Icon(Icons.smartphone),
+            ),
+          ])),
     );
   }
 }
