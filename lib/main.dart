@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new MaterialApp(title: "Latihan Pertama", home: new LatihanPertama()));
+  runApp(new MaterialApp(title: "Latihan Pertama", home: new HalamanSatu()));
 }
 
-class LatihanPertama extends StatelessWidget {
+class HalamanSatu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
         body: new Center(
-      child: new Text("hellor world",
-          style: TextStyle(
-              fontSize: 50.0,
-              color: Colors.blue[800],
-              fontWeight: FontWeight.w500)),
+      child: new Container(
+        color: Colors.blue[900],
+        width: 200.0,
+        height: 100.0,
+        child: new Center(
+          //   child: new Text(
+          //     "Lukman sefriyanto",
+          //     style: new TextStyle(
+          //         color: Colors.white, fontFamily: 'Serif', fontSize: 20.0),
+          //   ),
+          child: new Icon(Icons.favorite, color: Colors.yellow, size: 70.0),
+        ),
+      ),
     ));
   }
 }
