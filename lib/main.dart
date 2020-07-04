@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new MaterialApp(title: "Latihan Pertama", home: new HalamanSatu()));
+  runApp(new MaterialApp(
+    title: "Latihan Pertama",
+    home: new HalamanSatu(),
+    routes: <String, WidgetBuilder>{
+      '/Halsatu': (BuildContext context) => new HalamanSatu(),
+      '/Haldua': (BuildContext context) => new HalamanDua(),
+    },
+  ));
 }
 
 // class HalamanSatu extends StatelessWidget {
@@ -74,65 +81,105 @@ void main() {
 //   }
 // }
 // end
+// card and parsing
+// class HalamanSatu extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: new AppBar(title: new Text("card & parsing")),
+//       body: new Container(
+//         child: new Column(
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: <Widget>[
+//             new CardSaya(
+//               icon: Icons.home,
+//               teks: "home",
+//               warnaicon: Colors.brown,
+//             ),
+//             new CardSaya(
+//               icon: Icons.favorite,
+//               teks: "favorite",
+//               warnaicon: Colors.pink,
+//             ),
+//             new CardSaya(
+//               icon: Icons.place,
+//               teks: "place",
+//               warnaicon: Colors.blue,
+//             ),
+//             new CardSaya(
+//               icon: Icons.settings,
+//               teks: "setting",
+//               warnaicon: Colors.black,
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class CardSaya extends StatelessWidget {
+//   CardSaya({this.icon, this.teks, this.warnaicon});
+//   final IconData icon;
+//   final String teks;
+//   final Color warnaicon;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         padding: new EdgeInsets.all(10.0),
+//         child: new Card(
+//           child: new Column(
+//             children: <Widget>[
+//               new Icon(
+//                 icon,
+//                 size: 50.0,
+//                 color: warnaicon,
+//               ),
+//               new Text(
+//                 teks,
+//                 style: TextStyle(fontSize: 20.0),
+//               )
+//             ],
+//           ),
+//         ));
+//   }
+// }
+// end card
+
 class HalamanSatu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text("card & parsing")),
-      body: new Container(
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            new CardSaya(
-              icon: Icons.home,
-              teks: "home",
-              warnaicon: Colors.brown,
-            ),
-            new CardSaya(
-              icon: Icons.favorite,
-              teks: "favorite",
-              warnaicon: Colors.pink,
-            ),
-            new CardSaya(
-              icon: Icons.place,
-              teks: "place",
-              warnaicon: Colors.blue,
-            ),
-            new CardSaya(
-              icon: Icons.settings,
-              teks: "setting",
-              warnaicon: Colors.black,
-            )
-          ],
-        ),
+      appBar: new AppBar(
+        title: new Text("Music"),
       ),
+      body: new Center(
+          child: new IconButton(
+              icon: new Icon(Icons.headset, size: 50.0),
+              onPressed: () {
+                Navigator.pushNamed(context, '/Haldua');
+              })),
     );
   }
 }
 
-class CardSaya extends StatelessWidget {
-  CardSaya({this.icon, this.teks, this.warnaicon});
-  final IconData icon;
-  final String teks;
-  final Color warnaicon;
+class HalamanDua extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: new EdgeInsets.all(10.0),
-        child: new Card(
-          child: new Column(
-            children: <Widget>[
-              new Icon(
-                icon,
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text("Speaker"),
+      ),
+      body: new Center(
+          child: new IconButton(
+              icon: new Icon(
+                Icons.speaker,
                 size: 50.0,
-                color: warnaicon,
+                color: Colors.red,
               ),
-              new Text(
-                teks,
-                style: TextStyle(fontSize: 20.0),
-              )
-            ],
-          ),
-        ));
+              onPressed: () {
+                Navigator.pushNamed(context, '/Halsatu');
+              })),
+    );
   }
 }
