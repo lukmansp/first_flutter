@@ -38,6 +38,37 @@ class HalamanSatu extends StatelessWidget {
         ),
         actions: <Widget>[new Icon(Icons.search)],
       ),
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            new Icon(
+              Icons.local_pizza,
+              size: 70.0,
+              color: Colors.red,
+            ),
+            new Icon(Icons.cake, size: 70.0, color: Colors.red),
+            new Row(
+              children: <Widget>[
+                new Icon(
+                  Icons.donut_large,
+                  size: 70.0,
+                  color: Colors.red,
+                ),
+                new Icon(
+                  Icons.panorama_fish_eye,
+                  size: 70.0,
+                  color: Colors.red,
+                ),
+                new Icon(
+                  Icons.donut_large,
+                  size: 70.0,
+                  color: Colors.red,
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
