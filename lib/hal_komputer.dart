@@ -17,9 +17,9 @@ class Komputer extends StatelessWidget {
           new Padding(
             padding: new EdgeInsets.all(20.0),
           ),
-          new Icon(
-            Icons.computer,
-            size: 90.0,
+          new Image.asset(
+            "img/ntahlah.png",
+            width: 200.0,
           )
         ],
       )),

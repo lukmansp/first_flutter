@@ -17,9 +17,10 @@ class Radio extends StatelessWidget {
           new Padding(
             padding: new EdgeInsets.all(20.0),
           ),
-          new Icon(
-            Icons.radio,
-            size: 90.0,
+          new Image(
+            image: new NetworkImage(
+                "https://png.pngtree.com/element_pic/00/16/08/3057c4a13a8fb59.jpg"),
+            width: 200.0,
           )
         ],
       )),

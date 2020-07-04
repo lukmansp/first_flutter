@@ -17,9 +17,9 @@ class Headset extends StatelessWidget {
           new Padding(
             padding: new EdgeInsets.all(20.0),
           ),
-          new Icon(
-            Icons.headset,
-            size: 90.0,
+          new Image.asset(
+            'img/dicoba.png',
+            width: 200.0,
           )
         ],
       )),
