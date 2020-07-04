@@ -1,17 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert' show json;
 
 void main() {
   runApp(new MaterialApp(
-    title: "List View",
+    title: "Input Text, alert & snackbar",
     home: new Home(),
-    // home: new Home(
-    //   data: new List<String>.generate(300, (i) => "Ini data ke$i"),
-    // )
   ));
 }
 
@@ -21,76 +13,94 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List dataJSON;
+  String teks = "";
+  TextEditingController controllerInput = new TextEditingController();
+  TextEditingController controllerAlert = new TextEditingController();
+  TextEditingController controllerSnackbar = new TextEditingController();
+  final GlobalKey<ScaffoldState> _scafoldState = new GlobalKey<ScaffoldState>();
 
-  Future<String> ambildata() async {
-    http.Response hasil = await http.get(
-        Uri.encodeFull("https://jsonplaceholder.typicode.com/posts"),
-        headers: {"Accept": "application/json"});
-    this.setState(() {
-      dataJSON = json.decode(hasil.body);
-    });
+  void _snackbar(String str) {
+    if (str.isEmpty) return;
+    _scafoldState.currentState.showSnackBar(new SnackBar(
+      content: new Text(str, style: new TextStyle(fontSize: 20.0)),
+      duration: new Duration(seconds: 3),
+    ));
   }
 
-  @override
-  void initState() {
-    this.ambildata();
+  void _alertdialog(String str) {
+    if (str.isEmpty) return;
+    AlertDialog alertDialog = new AlertDialog(
+      content: new Text(
+        str,
+        style: new TextStyle(fontSize: 20.0),
+      ),
+      actions: <Widget>[
+        new RaisedButton(
+            color: Colors.purple,
+            child: new Text("OK"),
+            onPressed: () {
+              Navigator.pop(context);
+            })
+      ],
+    );
+    showDialog(context: context, child: alertDialog);
   }
 
   @override
   Widget build(BuildContext context) {
-    stderr.write('hello:$dataJSON');
     return new Scaffold(
-      appBar: new AppBar(title: new Text("List Data json")),
-      body: new ListView.builder(
-        itemCount: dataJSON == null ? 0 : dataJSON.length,
-        itemBuilder: (context, i) {
-          return new Container(
-            padding: new EdgeInsets.all(10.0),
-            child: new Card(
-              child: new Container(
-                padding: new EdgeInsets.all(10.0),
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Text(
-                      dataJSON[i]['title'],
-                      style: new TextStyle(fontSize: 20.0, color: Colors.blue),
-                    ),
-                    new Text(
-                      dataJSON[i]['body'],
-                      style:
-                          new TextStyle(fontSize: 15.0, color: Colors.blueGrey),
-                    )
-                  ],
-                ),
+      key: _scafoldState,
+      appBar: new AppBar(
+        title: new Text("Input text, alert & snackbar"),
+        backgroundColor: Colors.purple,
+      ),
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            new TextField(
+              decoration: new InputDecoration(
+                hintText: "Tulis disini",
               ),
+              // onChanged: (String str) {
+              //   setState(() {
+              //     teks = str;
+              //   });
+              // },
+              controller: controllerInput,
+              onSubmitted: (String str) {
+                setState(() {
+                  teks = str + '\n' + teks;
+                  controllerInput.text = "";
+                });
+              },
             ),
-          );
-        },
+            new Text(
+              teks,
+              style: new TextStyle(fontSize: 20.0),
+            ),
+            new TextField(
+              decoration: new InputDecoration(
+                hintText: "Tulis untuk alert",
+              ),
+              controller: controllerAlert,
+              onSubmitted: (String str) {
+                _alertdialog(str);
+                controllerAlert.text = "";
+              },
+            ),
+            new TextField(
+              decoration: new InputDecoration(
+                hintText: "Tulis untuk snackbar",
+              ),
+              controller: controllerSnackbar,
+              onSubmitted: (String str) {
+                _snackbar(str);
+                controllerSnackbar.text = "";
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-// list array
-// class Home extends StatelessWidget {
-//   final List<String> data;
-//   Home({this.data});
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       appBar: new AppBar(title: new Text("List View")),
-//       body: new Container(
-//           child: new ListView.builder(
-//         itemCount: data.length,
-//         itemBuilder: (context, index) {
-//           return new ListTile(
-//             leading: new Icon(Icons.widgets),
-//             title: new Text("${data[index]}"),
-//           );
-//         },
-//       )),
-//     );
-//   }
-// }
