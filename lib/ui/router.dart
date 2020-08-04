@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider_architecture/core/models/post.dart';
 import 'package:provider_architecture/ui/views/home_view.dart';
-import 'package:provider_architecture/ui/views/login_view.dart';
+import 'package:provider_architecture/ui/views/login/login_view.dart';
 import 'package:provider_architecture/ui/views/post_view.dart';
 
 const String initialRoute = "login";
