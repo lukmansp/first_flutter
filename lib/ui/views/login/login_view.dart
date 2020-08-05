@@ -6,8 +6,6 @@ import 'login_bloc.dart';
 import '../base_view.dart';
 
 class LoginView extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return BaseView<LoginModel>(
@@ -18,8 +16,8 @@ class LoginView extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
-  final TextEditingController _controllerPass = TextEditingController();
+  // final TextEditingController _controller = TextEditingController();
+  // final TextEditingController _controllerPass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final bloc = Bloc();
@@ -107,7 +105,9 @@ class Body extends StatelessWidget {
                                   onChanged: bloc.emailChanged,
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
                                       hintText: 'Enter Email',
                                       labelText: "email",
                                       // suffixIcon: IconButton(
@@ -127,7 +127,9 @@ class Body extends StatelessWidget {
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
                                       hintText: 'Enter Password',
                                       labelText: "password",
                                       errorText: snapshot.error),
@@ -160,16 +162,19 @@ class Body extends StatelessWidget {
                           child: StreamBuilder<Object>(
                               stream: bloc.submitCheck,
                               builder: (context, snapshot) {
-                                return RaisedButton(
-                                  onPressed: snapshot.hasData ? () {} : null,
-                                  color: Colors.blue[500],
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // side: BorderSide(color: Colors.red)
+                                return ButtonTheme(
+                                  height: 50,
+                                  child: RaisedButton(
+                                    onPressed: snapshot.hasData ? () {} : null,
+                                    color: Colors.blue[500],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      // side: BorderSide(color: Colors.red)
+                                    ),
+                                    child: const Text('Sign in',
+                                        style: TextStyle(
+                                            fontSize: 17, color: Colors.white)),
                                   ),
-                                  child: const Text('Sign in',
-                                      style: TextStyle(
-                                          fontSize: 17, color: Colors.white)),
                                 );
                               }),
                         ),
@@ -251,7 +256,9 @@ class Body extends StatelessWidget {
                             children: <Widget>[
                               Text('Dont have account ?'),
                               FlatButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, 'register');
+                                  },
                                   child: Text(
                                     'Sign up',
                                     style: TextStyle(color: Colors.blue[300]),

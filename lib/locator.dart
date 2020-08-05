@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'core/viewmodels/register_model.dart';
 
 import 'core/services/api.dart';
 import 'core/services/authentication_service.dart';
@@ -15,4 +16,5 @@ void setupLocator() {
   locator.registerFactory(() => LoginModel());
   locator.registerFactory(() => HomeModel());
   locator.registerFactory(() => CommentsModel());
+  locator.registerFactory(() => RegisterModel());
 }

@@ -5,6 +5,8 @@ import 'package:provider_architecture/ui/views/home_view.dart';
 import 'package:provider_architecture/ui/views/login/login_view.dart';
 import 'package:provider_architecture/ui/views/post_view.dart';
 
+import 'views/register/register_view.dart';
+
 const String initialRoute = "login";
 
 class Router {
@@ -17,6 +19,8 @@ class Router {
       case 'post':
         var post = settings.arguments as Post;
         return MaterialPageRoute(builder: (_) => PostView(post: post));
+      case 'register':
+        return MaterialPageRoute(builder: (_) => RegisterView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
